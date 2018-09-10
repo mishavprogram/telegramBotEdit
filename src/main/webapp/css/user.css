@@ -1,0 +1,93 @@
+.container {
+    background: #F0FFF0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0 50px;
+    border-bottom: 2px solid green;
+    margin-bottom: 50px;
+}
+
+header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.language {
+    float: right;
+    display: block;
+    height: 30px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+.greeting {
+    float: left;
+    margin-right: 0;
+    font-size: 30px;
+    color: green;
+}
+
+.mainSection {
+    display: flex;
+    justify-content: space-around;
+}
+
+input[type="submit"] {
+    margin: 0px auto;
+    background-color: #F0FFF0;
+    font-size: 20px;
+    border: 2px solid #98FB98;
+    border-radius: 5px;
+}
+
+h3 {
+    margin-top: 0px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.buttons input[type="submit"] {
+    margin: 25px 10px;
+}
+
+table {
+    font-size: 17px;
+}
+
+table {
+    vertical-align: middle;
+}
+
+.userTable {
+    border-right: 2px solid green;
+    border-bottom: 2px solid green;
+}
+
+.selectedRow {
+    background-color: lightgreen;
+}
+
+.navigation {
+    float: right;
+    margin: 20px 0 0 10px;
+}
+
+.typeOfActivities {
+    display: block;
+    margin: 0 auto;
+    width: 200px;
+    height: 40px;
+    font-size: 25px;
+    border: 2px solid green;
+    border-radius: 10px;
+    margin-bottom: 25px;
+}

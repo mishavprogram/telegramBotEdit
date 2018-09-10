@@ -1,0 +1,53 @@
+.container {
+    background: #F0FFF0;
+    max-width: 950px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+h1 {
+    text-align: center;
+    color: green;
+}
+
+form {
+    width: 400px;
+}
+
+form .field {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+}
+
+form .field input {
+    padding: 7px;
+}
+
+form .field label {
+    font-size: 20px;
+    color: green;
+}
+
+.language {
+    display: block;
+    height: 50px;
+    margin-top: 20px;
+    margin-bottom: 50px;
+}
+
+input[type="submit"] {
+    margin: 30px auto;
+    background-color: #F0FFF0;
+    color: green;
+    font-size: 20px;
+    border: 2px solid #98FB98;
+    border-radius: 5px;
+    float: right;
+}
+
+textarea {
+    resize: none;
+}

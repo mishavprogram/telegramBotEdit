@@ -1,0 +1,12 @@
+/.idea/
+/target/
+/out/
+/src/main/resources/META-INF/persistence.xml
+/src/main/resources/hibernate111.cfg.xml
+
+*.js
+*.min.css
+/src/main/java/stalkerbotGUI/dao/impl/jpa/
+/src/main/java/stalkerbotGUI/dao/impl/jdbc/FromStalkerSite.java
+/src/main/java/stalkerbotGUI/dao/impl/jdbc/MainTestJDBC.java
+*.iml
