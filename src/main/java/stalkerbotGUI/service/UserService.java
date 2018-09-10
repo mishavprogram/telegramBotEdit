@@ -7,6 +7,7 @@ import stalkerbotGUI.model.entity.TelegramBot;
 import stalkerbotGUI.model.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService extends GeneralUserService {
 
@@ -17,4 +18,8 @@ public interface UserService extends GeneralUserService {
     List<ExtendTelegramBot> getExtendTelegramBots(int limit, int offset, User author);
 
     List<TelegramBot> getTelegramBots(int limit, int offset);
+
+    void create(Phrase phrase);
+
+    Optional<TelegramBot> getTelegramBot(String bot_name);
 }

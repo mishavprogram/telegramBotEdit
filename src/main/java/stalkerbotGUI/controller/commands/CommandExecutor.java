@@ -52,11 +52,11 @@ public abstract class CommandExecutor implements Command {
         } catch (ApplicationException exception) {
             logger.error("application exception");
             putErrorMessageInRequest(request, exception.getMessageKey());
-            request.getRequestDispatcher(PagesPath.ERROR_PAGE).forward(request, response);
+            request.getRequestDispatcher(PagesPath.INFO_PAGE).forward(request, response);
         } catch (Exception exception) {
             logger.error("global exception..." + exception.getMessage());
             putErrorMessageInRequest(request, MessageKeys.UNKNOWN_ERROR_OCCURED);
-            request.getRequestDispatcher(PagesPath.ERROR_PAGE).forward(request, response);
+            request.getRequestDispatcher(PagesPath.INFO_PAGE).forward(request, response);
         }
         return PagesPath.FORWARD;
     }

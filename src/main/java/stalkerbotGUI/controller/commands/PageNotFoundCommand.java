@@ -15,6 +15,6 @@ public class PageNotFoundCommand implements Command {
         Errors errors = new Errors();
         errors.addError(Attributes.ERROR, MessageKeys.URL_NOT_FOUND);
         request.setAttribute(Attributes.ERRORS, errors);
-        return PagesPath.ERROR_PAGE;
+        return PagesPath.INFO_PAGE;
     }
 }

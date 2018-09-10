@@ -37,4 +37,12 @@ public final class Attributes {
 
     public static final String EXTEND_BOTS = "extend_bots";
     public static final String BOTS = "bots";
+
+    public static final String PHRASE_TEXT = "phrase_text";
+    public static final String BOT_ID = "bot_id";
+
+    public static final String INFO_TITLE = "info_title";
+    public static final String INFO_MESSAGE = "info_message";
+
+    public static final String BOT_LIST = "botList";
 }

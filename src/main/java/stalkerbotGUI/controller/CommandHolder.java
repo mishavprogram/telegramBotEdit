@@ -11,6 +11,8 @@ import stalkerbotGUI.controller.commands.login.LoginCommand;
 import stalkerbotGUI.controller.commands.login.LoginSubmitCommand;
 import stalkerbotGUI.controller.commands.login.RegisterCommand;
 import stalkerbotGUI.controller.commands.login.RegisterSubmitCommand;
+import stalkerbotGUI.controller.commands.user.CreatePhraseCommand;
+import stalkerbotGUI.controller.commands.user.CreatePhraseSubmitCommand;
 import stalkerbotGUI.controller.commands.user.UserPageCommand;
 
 import java.util.HashMap;
@@ -55,6 +57,9 @@ public class CommandHolder {
 
         commands.put("GET:/phrases_all", new PhrasePageCommand());
         commands.put("GET:/bots_all", new TelegramBotPageCommand());
+
+        commands.put("GET:/user/createPhrase", new CreatePhraseCommand());
+        commands.put("POST:/user/createPhrase", new CreatePhraseSubmitCommand());
     }
 
     /**

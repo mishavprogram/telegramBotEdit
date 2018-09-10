@@ -221,4 +221,9 @@ public class JDBCTelegramBotDao implements TelegramBotDao {
 
         return count;
     }
+
+    @Override
+    public Optional<TelegramBot> findByName(String bot_name) {
+        return Optional.empty();
+    }
 }

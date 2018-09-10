@@ -15,6 +15,9 @@ public final class PagesPath {
     public static final String PHRASES_ALL = "/phrases_all";
     public static final String BOT_ALL = "/bot_all";
 
+    public static final String CREATE_PHRASE = "/user/createPhrase";
+    public static final String CREATE_PHRASE_PAGE = VIEW_JSP_CLASSPATH + "createPhrase.jsp";
+
     public static final String LOGIN = "/login";
     public static final String REGISTER = "/register";
     public static final String LOGOUT = "/logout";
@@ -32,7 +35,7 @@ public final class PagesPath {
 
     public static final String LOGIN_PAGE = VIEW_JSP_CLASSPATH + "login.jsp";
     public static final String REGISTER_PAGE = VIEW_JSP_CLASSPATH + "register.jsp";
-    public static final String ERROR_PAGE = VIEW_JSP_CLASSPATH + "info.jsp";
+    public static final String INFO_PAGE = VIEW_JSP_CLASSPATH + "info.jsp";
 
     public static final String ADDING_ACTIVITY_PAGE = VIEW_JSP_CLASSPATH+"addAct.jsp";
     public static final String SET_TIME_PAGE = VIEW_JSP_CLASSPATH + "setTimePage.jsp";

@@ -12,7 +12,9 @@ import stalkerbotGUI.model.entity.ExtendTelegramBot;
 import stalkerbotGUI.model.entity.Phrase;
 import stalkerbotGUI.model.entity.TelegramBot;
 import stalkerbotGUI.model.entity.User;
+import stalkerbotGUI.model.entity.enums.CrudAction;
 import stalkerbotGUI.service.UserService;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,6 +66,28 @@ public class DefaultUserService extends DefaultGeneralUserService implements Use
     public List<TelegramBot> getTelegramBots(int limit, int offset) {
         try(TelegramBotDao telegramBotDao = DaoFactory.getInstance().createTelegramBotDao()){
             return telegramBotDao.getAll(limit, offset);
+        }
+    }
+
+    @Override
+    public void create(Phrase phrase) {
+        try(ExtendPhraseDao extendPhraseDao = DaoFactory.getInstance().createExtendPhraseDao()){
+
+            ExtendPhrase extendPhrase = new ExtendPhrase.Builder()
+                .setText(phrase.getText())
+                .setAuthor(phrase.getAuthor())
+                .setCrudAction(CrudAction.CREATE)
+                .setTelegramBot(phrase.getTelegramBot())
+                .getPhrase();
+
+            extendPhraseDao.create(extendPhrase);
+        }
+    }
+
+    @Override
+    public Optional<TelegramBot> getTelegramBot(String bot_name) {
+        try (TelegramBotDao telegramBotDao = DaoFactory.getInstance().createTelegramBotDao()) {
+            return telegramBotDao.findByName(bot_name);
         }
     }
 }
