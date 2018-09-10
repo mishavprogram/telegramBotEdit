@@ -64,6 +64,9 @@ public class AuthFilter implements Filter {
             return true;
         }
         Authorizer authorizer = authorizeByRole.getOrDefault(roleType, new AnonymAuthorizer());
+
+        logger.debug(roleType+" permission is : "+authorizer.check(uri, userId));
+
         return authorizer.check(uri, userId);
     }
 
@@ -71,7 +74,6 @@ public class AuthFilter implements Filter {
         boolean check(String uri, Object userId);//вертає true якщо все норм?
     }
 
-    //TODO check if everythink is norm here, because i changed smth
     private static class UserAuthorizer implements Authorizer {
         public boolean check(String uri, Object userId) {
             return userId != null && !uri.startsWith(PagesPath.ADMIN_HOME);
@@ -80,13 +82,7 @@ public class AuthFilter implements Filter {
 
     private static class AdminAuthorizer implements Authorizer {
         public boolean check(String uri, Object userId) {
-            return userId != null && (uri.startsWith(PagesPath.ADMIN_HOME) ||
-                    uri.startsWith(PagesPath.LOGIN) ||
-                    uri.startsWith(PagesPath.REGISTER)) ||
-                   uri.startsWith(PagesPath.WELCOME) ||
-                    uri.startsWith(PagesPath.LOGOUT) ||
-                uri.startsWith(PagesPath.BOT_ALL) ||
-                uri.startsWith(PagesPath.PHRASES_ALL);
+            return userId != null && !uri.startsWith(PagesPath.USER_HOME);
         }
     }
 
@@ -95,9 +91,7 @@ public class AuthFilter implements Filter {
             return uri.startsWith(PagesPath.LOGIN) ||
                     uri.startsWith(PagesPath.REGISTER) ||
                    uri.startsWith(PagesPath.WELCOME) ||
-                    uri.startsWith(PagesPath.LOGOUT) ||
-                uri.startsWith(PagesPath.BOT_ALL) ||
-                uri.startsWith(PagesPath.PHRASES_ALL);
+                    uri.startsWith(PagesPath.LOGOUT);
         }
     }
 

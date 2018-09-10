@@ -23,7 +23,7 @@
         <header>
             <h1 class="greeting"><fmt:message key="hello" bundle="${msg}"/>, <c:out value="${sessionScope.get(\"userName\")} ${sessionScope.get(\"userSurname\")}!"/></h1>
             <nav class="navigation">
-                <form method="get" action="/user">
+                <form method="get" action="/">
                     <input type="submit" value="<fmt:message key="home" bundle="${msg}"/>">
                 </form>
                 <form method="get" action="/logout">

@@ -37,19 +37,6 @@
             </div>
             <input type="submit" value="Enter">
         </form>
-
-        <%--<form method="post" crudAction="/">
-            <h1 class="auth"><fmt:message key="autorization" bundle="${msg}"/></h1>
-            <div class="field">
-                <label for="email"><fmt:message key="email" bundle="${msg}"/> : </label>
-                <input id="email" name="login_email" type="email" required>
-            </div>
-            <div class="field">
-                <label for="password"><fmt:message key="password" bundle="${msg}"/></label>
-                <input id="password" name="login_password" type="password" required>
-            </div>
-            <input type="submit" value="<fmt:message key="enter" bundle="${msg}"/>">
-        </form>--%>
     </div>
     <div class="dropdown choose-country">
         <c:forEach items="${SUPPORTED_LOCALES}" var="value">

@@ -19,7 +19,7 @@
             <form>
             <input type="submit" value="go back" onclick="history.back()"/>
             </form>
-            <form method="get" action="/user">
+            <form method="get" action="/">
             <input type="submit" value="go home"/>
             </form>
 
