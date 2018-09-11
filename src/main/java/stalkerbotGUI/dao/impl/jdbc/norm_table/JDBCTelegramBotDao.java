@@ -39,6 +39,11 @@ public class JDBCTelegramBotDao implements TelegramBotDao {
 
     private static final String GET_BY_USER_COUNT = "select count(*) from telegrambot_table where bot_author=?";
 
+    private static final String GET_BY_FULLNAME = "select *\n"
+                                                  + "from telegrambot_table as ttt left join user_table\n"
+                                                  + "    on ttt.bot_author = user_table.user_id\n"
+                                                  + "where ttt.bot_fullname = ?;";
+
     private static Logger logger = Logger.getLogger(JDBCTelegramBotDao.class);
 
     private Connection connection;
@@ -224,6 +229,26 @@ public class JDBCTelegramBotDao implements TelegramBotDao {
 
     @Override
     public Optional<TelegramBot> findByName(String bot_name) {
-        return Optional.empty();
+        Optional<TelegramBot> optionalBot = Optional.empty();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(GET_BY_FULLNAME)){
+
+            preparedStatement.setString(1, bot_name);
+
+            preparedStatement.execute();
+
+            ResultSet set = preparedStatement.getResultSet();
+
+            set.next();
+
+            TelegramBot bot = ResultSetExtractors.extractTelegramBotFromResultSet(set);
+            logger.debug("founded bot : "+bot);
+            optionalBot = Optional.of(bot);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return optionalBot;
     }
 }

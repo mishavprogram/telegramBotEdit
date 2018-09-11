@@ -22,14 +22,26 @@
                 <input id="phrase_text" name="phrase_text" type="text" required>
             </div>
             <div class="field">
-                <select id="bot_id" name="bot_id">
+
+                <%--<select id="bot_id" name="bot_id">
                     <c:forEach items="${botList}" var="bot">
                         <option value="${bot}">
                                 ${bot}
                         </option>
                     </c:forEach>
+                </select>--%>
+
+                <select name='bot'>
+                    <option value="${selected}" selected>${selected}</option>
+                    <c:forEach items="${botList}" var="bot">
+                        <c:if test="${bot != selected}">
+                            <option value="${bot}">${bot}</option>
+                        </c:if>
+                    </c:forEach>
                 </select>
+
             </div>
+            <input type="submit" value="create" onclick="">
         </form>
         <aside>
             <div>

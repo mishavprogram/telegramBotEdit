@@ -15,7 +15,8 @@
 
     <div class="container">
         <div>
-            <h1>Some error was...</h1>
+            <h1 class="greeting"><c:out value="${requestScope.get(\"infoTitle\")} ${requestScope.get(\"info_message\")}!"/></h1>
+            <h1 class="greeting"><c:out value="${sessionScope.get(\"userName\")} ${sessionScope.get(\"userSurname\")}!"/></h1>
             <form>
             <input type="submit" value="go back" onclick="history.back()"/>
             </form>
