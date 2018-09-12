@@ -1,6 +1,10 @@
 # telegramBotEdit
-web-project, that allow to control database, that can be used by my telegram bot
+short-descr: web-project, that allow to control database, that can be used by my telegram bot
 finalproject
+
+long-descr: веб-приложение для работы с базой данных, к которой может подлючатся другое приложение(например, мой бот). Есть сущности "фраза" и "бот, который должен эту фразу говорить". 
+Что может делать юзер? Делать CRUD операции с "фразами" и "ботами".
+Что может делать админ? Подтверждать(или нет) эти операции.
      
 Необходимо построить веб-приложение, поддерживающую следующую функциональность:
 
