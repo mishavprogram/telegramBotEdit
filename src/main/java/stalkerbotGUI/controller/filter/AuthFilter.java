@@ -71,7 +71,7 @@ public class AuthFilter implements Filter {
     }
 
     private interface Authorizer {
-        boolean check(String uri, Object userId);//вертає true якщо все норм?
+        boolean check(String uri, Object userId);
     }
 
     private static class UserAuthorizer implements Authorizer {

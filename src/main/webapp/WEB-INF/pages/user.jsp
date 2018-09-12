@@ -63,6 +63,9 @@
                     <form method="get" action="/bots_all">
                         <input type="submit" value="go to all bots">
                     </form>
+                    <form method="get" action="/users/createPhrase">
+                        <input type="submit" value="create phrase">
+                    </form>
                 </div>
             </div>
         </section>
