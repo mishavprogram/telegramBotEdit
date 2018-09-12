@@ -28,8 +28,6 @@ public final class PagesPath {
     public static final String WELCOME = "/home";
     public static final String WELCOME_PAGE = VIEW_JSP_CLASSPATH +"/home.jsp";
 
-    public static final String ADDING_ACTIVITY = "/addingActivity";
-
     public static final String USER_HOME_PAGE = VIEW_JSP_CLASSPATH + "user.jsp";
     public static final String ADMIN_HOME_PAGE = VIEW_JSP_CLASSPATH + "admin.jsp";
 
@@ -40,12 +38,5 @@ public final class PagesPath {
     public static final String REGISTER_PAGE = VIEW_JSP_CLASSPATH + "register.jsp";
     public static final String INFO_PAGE = VIEW_JSP_CLASSPATH + "info.jsp";
     public static final String INFO = "/info";
-
-    public static final String ADDING_ACTIVITY_PAGE = VIEW_JSP_CLASSPATH+"addAct.jsp";
-    public static final String SET_TIME_PAGE = VIEW_JSP_CLASSPATH + "setTimePage.jsp";
-    public static final String MAKE_DECISION_PAGE = VIEW_JSP_CLASSPATH+"makeDecisionPage.jsp";
-
-    public static final String SET_TIME = "/setTime";
-    public static final String MAKE_DECISION = "/makeDecision";
 
 }

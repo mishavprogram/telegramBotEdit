@@ -34,9 +34,8 @@ public class Paginator extends SimpleTagSupport {
 
     @Override
     public void doTag() throws JspException {
-        System.out.println("Paginator!!!!!");
         if(totalPages == 0 || totalPages == FIRST_PAGE_NUMBER){
-            return;//TODO then paginator not work
+            return;
         }
 
         resolveRequestGetParams();
@@ -50,10 +49,9 @@ public class Paginator extends SimpleTagSupport {
             int pagingStartNumber = Math.max(currentPageNumber - maxPaginElems / 2, 1);
             int pagingEndNumber = Math.min(pagingStartNumber + maxPaginElems,totalPages);
 
-
             printBeginTag(out);
 
-            if(!isCurrentPageFirst){//якщо сторінка 1 то не
+            if(!isCurrentPageFirst){
                 printPreviousPageItem(out);
             }
             printPagingElems(out,pagingStartNumber,pagingEndNumber);
@@ -150,9 +148,5 @@ public class Paginator extends SimpleTagSupport {
             }
         }
         uri=resultUri.toString();
-
-        System.out.println("Pagin param name : "+paginParamName);
-        System.out.println("Current page number : "+currentPageNumber);
-        System.out.println("Total pages : "+totalPages);
     }
 }

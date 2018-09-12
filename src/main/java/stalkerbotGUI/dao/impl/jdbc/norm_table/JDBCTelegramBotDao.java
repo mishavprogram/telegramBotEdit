@@ -57,7 +57,7 @@ public class JDBCTelegramBotDao implements TelegramBotDao {
         try{
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1,person.getFullName());
-            //TODO - null exception????
+
             preparedStatement.setLong(2, person.getAuthor().getId());
 
             if (person.getLastModif()==null)

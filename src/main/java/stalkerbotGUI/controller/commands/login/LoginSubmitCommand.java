@@ -35,25 +35,34 @@ public class LoginSubmitCommand extends CommandExecutor {
     public String performExecute(HttpServletRequest request, HttpServletResponse response) throws IOException {
         saveLoginDataToRequest(request);
         String pageToGo = PagesPath.LOGIN;
+
         String email = request.getParameter(PARAM_EMAIL);
         String password = request.getParameter(PARAM_PASSWORD);
 
-        //String passwordHash = HashUtils.getMD5Hash(password);
-
         Optional<User> user = userService.login(email, password);
+
         if (user.isPresent()) {
-            logger.debug("user is present");
             User person = user.get();
             pageToGo = getResultPageByUserRole(person);
-            request.getSession().setAttribute(Attributes.USER_ID, person.getId());
-            request.getSession().setAttribute(Attributes.USER_ROLE, person.getRole());
-            logger.debug("user role : "+person.getRole());
-            request.getSession().setAttribute(Attributes.USER_NAME, person.getName());
-            request.getSession().setAttribute(Attributes.USER_SURNAME, person.getSurname());
-        } else logger.warn("user with email: "+email+", and password: "+password+" not exist in database");
+
+            setUserParametersInSession(request, person);
+        } else {
+            logger.warn("user with email: " + email + ", and password: " + password + " not exist in database");
+        }
+
         clearLoginDataFromRequest(request);
+
         logger.debug("page to go : "+pageToGo);
+
         return pageToGo;
+    }
+
+    private void setUserParametersInSession(HttpServletRequest request, User person) {
+        request.getSession().setAttribute(Attributes.USER_ID, person.getId());
+        request.getSession().setAttribute(Attributes.USER_ROLE, person.getRole());
+
+        request.getSession().setAttribute(Attributes.USER_NAME, person.getName());
+        request.getSession().setAttribute(Attributes.USER_SURNAME, person.getSurname());
     }
 
     private String getResultPageByUserRole(User user) {

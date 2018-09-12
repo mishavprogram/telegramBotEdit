@@ -102,7 +102,6 @@ public class AuthFilter implements Filter {
      * @throws ServletException
      */
     @Override
-    //TODO
     public void init(FilterConfig filterConfig) throws ServletException {
 
     }

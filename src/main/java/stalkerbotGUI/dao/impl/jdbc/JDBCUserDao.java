@@ -15,7 +15,6 @@ import java.util.Optional;
 import javax.ws.rs.NotSupportedException;
 
 public class JDBCUserDao implements UserDao {
-    public static volatile int count = 0;
 
     private static final String INSERT_USER = "INSERT INTO test1.user_table (name, surname, role, email, password) VALUES (?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "select * from test1.user_table where email = ?;";
@@ -28,15 +27,6 @@ public class JDBCUserDao implements UserDao {
 
     JDBCUserDao(Connection connection) {
         this.connection = connection;
-        count++;
-    }
-
-    public static synchronized void incCount(){
-        count++;
-    }
-
-    public static synchronized void decCount(){
-        count--;
     }
 
     @Override
@@ -111,7 +101,6 @@ public class JDBCUserDao implements UserDao {
         try {
             System.out.println(connection.getClass());
             connection.close();
-            decCount();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -128,7 +117,6 @@ public class JDBCUserDao implements UserDao {
 
             if (set.isBeforeFirst()) {
                 set.next();
-                //UserMapper userMapper = new UserMapper();
                 user = Optional.of(ResultSetExtractors.extractUserFromResultSet(set));
                 logger.debug(user);
 

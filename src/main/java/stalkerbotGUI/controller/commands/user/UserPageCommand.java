@@ -30,15 +30,10 @@ public class UserPageCommand extends CommandExecutor {
         logger.debug("max count elem on page : "+maxCountOfElemOnPage);
         long userId = (long) (request.getSession().getAttribute(Attributes.USER_ID));
 
-        long totalCount = userService.getCountOfExtendPhrases(userId);//= activityService.getCountOfActiveActivities(userId, dateToShow);
+        long totalCount = userService.getCountOfExtendPhrases(userId);
         int totalPages = calculateOverallPagesCount(maxCountOfElemOnPage, (int) totalCount);
         int numberOfPage = getNumberOfPageOrDefault(request);
 
-        //List<Activity> activities = activityService.getActiveActivities(numberOfPage, maxCountOfElemOnPage, userId, dateToShow);
-        //request.setAttribute(Attributes.ACTIVITIES, activities);
-        //request.setAttribute(Attributes.TOTAL_PAGES, totalPages);
-
-        //TODO ?????????
         long my_id = (long) request.getSession().getAttribute(Attributes.USER_ID);
 
         Optional<User> optionalUser = userService.getUser(my_id);
@@ -46,10 +41,8 @@ public class UserPageCommand extends CommandExecutor {
         List<ExtendPhrase> extendPhraseList = new ArrayList<>();
 
         if (optionalUser.isPresent()) {
-            logger.warn("user is found");
             User user = optionalUser.get();
             extendPhraseList = userService.getExtendPhrases(maxCountOfElemOnPage, maxCountOfElemOnPage*(numberOfPage-1), user);
-            logger.debug("Extend phrase list size : "+extendPhraseList.size());
         }
 
         request.setAttribute(Attributes.EXTEND_PHRASES, extendPhraseList);

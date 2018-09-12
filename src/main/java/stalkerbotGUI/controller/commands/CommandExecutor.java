@@ -4,13 +4,12 @@ import org.apache.log4j.Logger;
 import stalkerbotGUI.controller.validators.Errors;
 import stalkerbotGUI.exception.ApplicationException;
 import stalkerbotGUI.service.exception.ServiceException;
+import stalkerbotGUI.utils.InfoPageUtils;
 import stalkerbotGUI.utils.constants.Attributes;
-import stalkerbotGUI.utils.constants.MessageKeys;
 import stalkerbotGUI.utils.constants.PagesPath;
 import stalkerbotGUI.utils.extractors.RequestParamExtractor;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.Optional;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,8 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class CommandExecutor implements Command {
     private final String nextPage;
     private RequestParamExtractor paramExtractor = new RequestParamExtractor();
-    private static final int DEFAULT_QUANTITY_VALUE = 5;
-    private static final int DEFAULT_OFFSET_VALUE = 0;
+    private static final int DEFAULT_QUANTITY_VALUE = 10;
     private static final int DEFAULT_PAGE = 1;
 
     protected Logger logger = Logger.getLogger(this.getClass());
@@ -47,28 +45,20 @@ public abstract class CommandExecutor implements Command {
             return performExecute(request, response);
         } catch (ServiceException exception) {
             logger.error("service exception");
-            putErrorMessageInRequest(request, exception.getMessageKey());
+            InfoPageUtils.prepareInfoForInfoPage(request, "service error", exception.getMessage());
             request.getRequestDispatcher(nextPage).forward(request, response);
         } catch (ApplicationException exception) {
             logger.error("application exception");
-            putErrorMessageInRequest(request, exception.getMessageKey());
+            InfoPageUtils.prepareInfoForInfoPage(request, "application error", exception.getMessage());
             request.getRequestDispatcher(PagesPath.INFO_PAGE).forward(request, response);
         } catch (Exception exception) {
             logger.error("global exception..." + exception.getMessage());
-            putErrorMessageInRequest(request, MessageKeys.UNKNOWN_ERROR_OCCURED);
+            InfoPageUtils.prepareInfoForInfoPage(request, "global exception" , exception.getMessage());
             request.getRequestDispatcher(PagesPath.INFO_PAGE).forward(request, response);
         }
         return PagesPath.FORWARD;
     }
 
-    public void putErrorMessageInRequest(HttpServletRequest request, String messageKey) {
-        Errors errors = (Errors) request.getAttribute(Attributes.ERRORS);
-        if (errors == null) {
-            errors = new Errors();
-        }
-        errors.addError(Attributes.ERROR, messageKey);
-        request.setAttribute(Attributes.ERRORS, errors);
-    }
 
     public abstract String performExecute(HttpServletRequest request, HttpServletResponse response)
         throws ServletException, IOException;
@@ -76,12 +66,6 @@ public abstract class CommandExecutor implements Command {
     protected int getLimitValueOrDefault(HttpServletRequest request) {
         return Optional.ofNullable(paramExtractor.extractPaginParam(request, Attributes.LIMIT))
                 .orElse(DEFAULT_QUANTITY_VALUE);
-    }
-
-    protected int getOffsetValueOrDefault(HttpServletRequest request, int quantity) {
-        return Optional.ofNullable(paramExtractor.extractPaginParam(request, Attributes.OFFSET))
-                .map(page -> (page - 1) * quantity)
-                .orElse(DEFAULT_OFFSET_VALUE);
     }
 
     protected int calculateOverallPagesCount(int limit, int totalCount) {

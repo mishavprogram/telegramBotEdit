@@ -4,6 +4,7 @@ import stalkerbotGUI.controller.commands.Command;
 import stalkerbotGUI.model.entity.TelegramBot;
 import stalkerbotGUI.service.UserService;
 import stalkerbotGUI.service.impl.DefaultUserService;
+import stalkerbotGUI.utils.InfoPageUtils;
 import stalkerbotGUI.utils.constants.Attributes;
 import stalkerbotGUI.utils.constants.PagesPath;
 
@@ -30,11 +31,11 @@ public class CreatePhraseCommand implements Command {
 
             bots = userService.getTelegramBots(LIMIT_OF_BOTS_TO_SHOW_USER, 0)
                 .stream()
-                .map(a->a.getFullName())
+                .map(TelegramBot::getFullName)
                 .collect(Collectors.toList());
         }
         catch (Exception ex){
-            //TODO show reasons
+            InfoPageUtils.prepareInfoForInfoPage(request, Attributes.ERROR, Attributes.ERRORS);
             return PagesPath.INFO_PAGE;
         }
 

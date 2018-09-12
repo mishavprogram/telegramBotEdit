@@ -18,13 +18,6 @@ public class LoginUtils {
     public static void clearLoginDataFromRequest(HttpServletRequest request) {
         request.removeAttribute(Attributes.PREVIOUS_LOGIN_EMAIL);
         request.removeAttribute(Attributes.PREVIOUS_LOGIN_PASSWORD);
-        
-        /*Enumeration enumeration = request.getParameterNames();
-
-        System.out.println("Parameters : ");
-        while (enumeration.hasMoreElements()){
-            System.out.println(enumeration);
-        }*/
     }
 
 }

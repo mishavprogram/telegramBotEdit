@@ -9,6 +9,7 @@ import stalkerbotGUI.service.exception.ServiceException;
 import stalkerbotGUI.service.impl.DefaultUserService;
 import stalkerbotGUI.utils.InfoPageUtils;
 import stalkerbotGUI.utils.constants.Attributes;
+import stalkerbotGUI.utils.constants.Messages;
 import stalkerbotGUI.utils.constants.PagesPath;
 
 import java.io.IOException;
@@ -32,60 +33,67 @@ public class CreatePhraseSubmitCommand extends CommandExecutor {
         String pageToGo = PagesPath.INFO_PAGE;
 
         try {
-            String text = request.getParameter(Attributes.PHRASE_TEXT);
-            String bot_name = request.getParameter(Attributes.BOT);
-
-            logger.debug("text : "+text);
-            logger.debug("bot_name : "+bot_name);
-
-            Optional<User> optionalUser = userService.getUser(Long.parseLong(request.getSession()
-                                              .getAttribute(Attributes.USER_ID)
-                                                             .toString()));
-
-            if (optionalUser.isPresent()) {
-
-                Optional<TelegramBot> telegramBot = userService.getTelegramBot(bot_name);
-
-                if (telegramBot.isPresent()) {
-
-                    Phrase phrase = new Phrase.Builder()
-                        .setText(text)
-                        .setTelegramBot(telegramBot.get())
-                        .setAuthor(optionalUser.get())
-                        .getPhrase();
-
-                    userService.create(phrase);
-                    logger.debug("фраза наче створилась без проблем");
-                }else
-                {
-                    InfoPageUtils.prepareInfoForInfoPage(request,
-                                                         "Створення фрази",
-                                                         "bot not found!");
-                }
-            } else{
-                InfoPageUtils.prepareInfoForInfoPage(request,
-                                                     "Створення фрази",
-                                                     "author not found!");
-            }
-            InfoPageUtils.prepareInfoForInfoPage(request,
-                                                 "Успіх!",
-                                                 "Ви створили фразу!");
+            getUserBotAndCreatePhrase(request);
         }
         catch (NumberFormatException ex){
-            String info_title = "Number Format Exception";
-            String info_message = "Ймовірно ви ввели неіснуюче id бота";
-
-            InfoPageUtils.prepareInfoForInfoPage(request, info_title, info_message);
+            InfoPageUtils.prepareInfoForInfoPage(request, Attributes.ERROR, Messages.YOU_ENTER_NOT_NUMBER);
         }
         catch (ServiceException ex){
             InfoPageUtils.prepareInfoForInfoPage(request,
-                                                 "Помилка при створенні фрази."
-                                                 + "Рівень сервісів",
+                                                 Attributes.ERROR,
                                                  ex.getMessage());
         }
 
         request.getRequestDispatcher(pageToGo).forward(request, response);
 
         return PagesPath.FORWARD;
+    }
+
+    private void getUserBotAndCreatePhrase(HttpServletRequest request) {
+        String text = request.getParameter(Attributes.PHRASE_TEXT);
+        String bot_name = request.getParameter(Attributes.BOT);
+
+        logger.debug("text : "+text);
+        logger.debug("bot_name : "+bot_name);
+
+        Optional<User> optionalUser = userService.getUser(Long.parseLong(request.getSession()
+                                          .getAttribute(Attributes.USER_ID)
+                                                         .toString()));
+
+        if (optionalUser.isPresent()) {
+            getTelegramBotAndCreatePhrase(request, text, bot_name, optionalUser.get());
+        } else{
+            InfoPageUtils.prepareInfoForInfoPage(request,
+                                                 Attributes.ERROR,
+                                                 Messages.AUTHOR_NOT_FOUND);
+        }
+
+        InfoPageUtils.prepareInfoForInfoPage(request,
+                                             Attributes.SUCCESS,
+                                             Messages.YOU_CREATE_PHRASE);
+    }
+
+    private void getTelegramBotAndCreatePhrase(HttpServletRequest request, String text, String bot_name,
+                                               User user) {
+        Optional<TelegramBot> telegramBot = userService.getTelegramBot(bot_name);
+
+        if (telegramBot.isPresent()) {
+            createPhrase(text, user, telegramBot.get());
+        }else
+        {
+            InfoPageUtils.prepareInfoForInfoPage(request,
+                                                 Attributes.ERROR,
+                                                 Messages.BOT_NOT_FOUND);
+        }
+    }
+
+    private void createPhrase(String text, User user, TelegramBot telegramBot) {
+        Phrase phrase = new Phrase.Builder()
+            .setText(text)
+            .setTelegramBot(telegramBot)
+            .setAuthor(user)
+            .getPhrase();
+
+        userService.create(phrase);
     }
 }

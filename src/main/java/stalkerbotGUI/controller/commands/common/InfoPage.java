@@ -1,6 +1,8 @@
 package stalkerbotGUI.controller.commands.common;
 
 import stalkerbotGUI.controller.commands.Command;
+import stalkerbotGUI.utils.InfoPageUtils;
+import stalkerbotGUI.utils.constants.Attributes;
 import stalkerbotGUI.utils.constants.PagesPath;
 
 import java.io.IOException;

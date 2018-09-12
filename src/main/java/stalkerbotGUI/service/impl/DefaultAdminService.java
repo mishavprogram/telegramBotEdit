@@ -22,10 +22,9 @@ public class DefaultAdminService extends DefaultGeneralUserService implements Ad
 
     @Override
     public List<ExtendPhrase> getExtendPhrases(int limit, int offset) {
-        //TODO
+
         List<ExtendPhrase> extendPhraseList = new ArrayList<>();
 
-        //TODO test if exception. Why initialization of extendPhraseList is not important?
         try(ExtendPhraseDao extendPhraseDao = DaoFactory.getInstance().createExtendPhraseDao()){
             extendPhraseList = extendPhraseDao.getAll(limit, offset);
         }
@@ -73,7 +72,7 @@ public class DefaultAdminService extends DefaultGeneralUserService implements Ad
                     connection.commit();
                 } catch (SQLException e) {
                     try {
-                        connection.rollback();//TODO why???
+                        connection.rollback();
                     } catch (SQLException e1) {
                         throw new DaoException(e.getMessage());
                     }

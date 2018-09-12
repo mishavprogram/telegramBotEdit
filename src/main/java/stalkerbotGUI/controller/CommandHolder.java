@@ -39,8 +39,8 @@ public class CommandHolder {
      * @return command
      */
     Command findCommand(String key) {
-        String convertedKey = removeAllNumbersFromUrl(key);
-        return commands.getOrDefault(convertedKey, new PageNotFoundCommand());
+        //String convertedKey = removeAllNumbersFromUrl(key);
+        return commands.getOrDefault(key, new PageNotFoundCommand());
     }
 
     //TODO
@@ -77,7 +77,7 @@ public class CommandHolder {
      * @param url
      * @return converted url
      */
-    private String removeAllNumbersFromUrl(String url) {
+    /*private String removeAllNumbersFromUrl(String url) {
         return url.replaceAll(NUMBER_BETWEEN_SLASHES_PATTERN, "/id");
-    }
+    }*/
 }

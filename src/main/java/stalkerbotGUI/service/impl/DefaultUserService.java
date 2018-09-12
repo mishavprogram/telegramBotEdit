@@ -20,21 +20,19 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-//TODO - services can be SINGLETON
 public class DefaultUserService extends DefaultGeneralUserService implements UserService {
 
     private Logger logger = Logger.getLogger(DefaultUserService.class);
 
     @Override
     public List<ExtendPhrase> getExtendPhrases(int limit, int offset, User author) {
-        //TODO
+
         List<ExtendPhrase> extendPhraseList = new ArrayList<>();
 
         try(UserDao userDao = DaoFactory.getInstance().createUserDao()){
             Optional<User> optionalUser = userDao.findById(author.getId());
 
             if (optionalUser.isPresent()){
-                logger.debug("user with id "+optionalUser.get().getId()+" is founded in database");
                 try(ExtendPhraseDao extendPhraseDao = DaoFactory.getInstance().createExtendPhraseDao()){
                     extendPhraseList = extendPhraseDao.getAll(limit, offset, author.getId());
                 }
@@ -57,7 +55,6 @@ public class DefaultUserService extends DefaultGeneralUserService implements Use
     @Override
     public List<ExtendTelegramBot> getExtendTelegramBots(int limit, int offset, User author) {
         try(ExtendTelegramBotDao extendTelegramBotDao = DaoFactory.getInstance().createExtendTelegramBotDao()){
-            //TODO чекати чи є юзер, чи нє?))
             return extendTelegramBotDao.getAll(limit, offset, author.getId());
         }
     }

@@ -43,14 +43,13 @@ public class JDBCExtendTelegramBotDao implements ExtendTelegramBotDao {
         this.connection = connection;
     }
 
-    //TODO using ordinal() - is antipattern
     @Override
     public void create(ExtendTelegramBot object) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(INSERT);
             preparedStatement.setString(1, object.getCrudAction().name());
             preparedStatement.setString(2, object.getFullName());
-            //TODO-null exception?
+
             preparedStatement.setLong(3, object.getAuthor().getId());
 
             if (object.getLastModif()==null)

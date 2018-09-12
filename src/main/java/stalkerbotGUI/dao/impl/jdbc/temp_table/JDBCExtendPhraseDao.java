@@ -83,14 +83,13 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
             else preparedStatement.setLong(6, object.getLastModif().getId());
 
             preparedStatement.execute();
-            //preparedStatement.close();
+
         }catch (SQLException ex){
             logger.debug(ex.getMessage());
             throw new DaoException(ex.getMessage());
         }
     }
 
-    //TODO а якщо не знайдено? яка помилка буде?
     @Override
     public Optional<ExtendPhrase> findById(long id) {
         Optional<ExtendPhrase> phraseOptional = Optional.empty();
@@ -152,15 +151,10 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
     @Override
     public List<ExtendPhrase> getAll(int limit, int offset, long author_id) {
 
-        //TODO - linked list ?
         List<ExtendPhrase> extendPhraseList = new ArrayList<>();
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_WITH_LIMIT_OFFSET_BY_AUTHOR_ID);
-
-            /*logger.debug("author_id = "+author_id);
-            logger.debug("limit = "+limit);
-            logger.debug("offset = "+offset);*/
 
             preparedStatement.setLong(1, author_id);
             preparedStatement.setInt(2, limit);
@@ -201,15 +195,12 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
 
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(GET_ALL_COUNT);
-
             preparedStatement.execute();
 
             ResultSet set = preparedStatement.getResultSet();
-
             set.next();
 
             count = set.getLong(1);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }

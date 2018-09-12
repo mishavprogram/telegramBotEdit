@@ -1,7 +1,6 @@
 package stalkerbotGUI.controller.commands.common;
 
 import stalkerbotGUI.controller.commands.CommandExecutor;
-import stalkerbotGUI.model.entity.Phrase;
 import stalkerbotGUI.model.entity.TelegramBot;
 import stalkerbotGUI.service.UserService;
 import stalkerbotGUI.service.impl.DefaultUserService;
@@ -19,7 +18,6 @@ public class TelegramBotPageCommand extends CommandExecutor {
 
     private UserService userService = new DefaultUserService();
 
-    //TODO page?
     public TelegramBotPageCommand() {
         super(PagesPath.BOT_ALL);
     }
@@ -30,15 +28,12 @@ public class TelegramBotPageCommand extends CommandExecutor {
         int maxCountOfElemOnPage = getLimitValueOrDefault(request);
         logger.debug("max count elem on page : "+maxCountOfElemOnPage);
 
-        //long userId = (long) (request.getSession().getAttribute(Attributes.USER_ID));
-
         long totalCount = userService.getCountOfTelegramBots();
         int totalPages = calculateOverallPagesCount(maxCountOfElemOnPage, (int) totalCount);
         int numberOfPage = getNumberOfPageOrDefault(request);
 
-        List<TelegramBot> telegramBots = new ArrayList<>();
-
-        telegramBots = userService.getTelegramBots(maxCountOfElemOnPage, maxCountOfElemOnPage*(numberOfPage-1));
+        List<TelegramBot> telegramBots =
+            userService.getTelegramBots(maxCountOfElemOnPage, maxCountOfElemOnPage*(numberOfPage-1));
 
         request.setAttribute(Attributes.BOTS, telegramBots);
         request.setAttribute(Attributes.TOTAL_PAGES, totalPages);

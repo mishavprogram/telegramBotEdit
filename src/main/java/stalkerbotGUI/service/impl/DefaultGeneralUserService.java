@@ -16,8 +16,6 @@ import java.util.Optional;
 public abstract class DefaultGeneralUserService implements GeneralUserService {
 
     @Override
-    //TODO пароль що приходить від юзера перетворити в хеш-код, і з ним вже гратись
-    //TODO на передачу NULL погратись
     public Optional<User> login(String email, String password) {
 
         UserDao userDao = DaoFactory.getInstance().createUserDao();
@@ -37,8 +35,6 @@ public abstract class DefaultGeneralUserService implements GeneralUserService {
     }
 
     @Override
-    //TODO Якщо такий юзер вже є в базі?
-    //Контроллер нічого не знає, тому хай сервіс просто не створює ще такого самого, якщо вже є?
     public void create(User user) throws UserAlreadyExistException {
 
         UserDao userDao = DaoFactory.getInstance().createUserDao();

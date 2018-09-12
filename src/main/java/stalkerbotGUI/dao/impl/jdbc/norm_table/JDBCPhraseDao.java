@@ -184,6 +184,7 @@ public class JDBCPhraseDao implements PhraseDao {
 
     @Override
     public long getAllByUserIdCount(long userId) {
+
         long count = 0;
 
         try {

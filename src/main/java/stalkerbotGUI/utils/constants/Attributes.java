@@ -8,7 +8,6 @@ public final class Attributes {
     public static final String ERROR = "error";
     public static final String ERRORS = "errors";
 
-    public static final String USER_PASSWORD = "userPassword";
     public static final String USER_NAME = "userName";
     public static final String USER_SURNAME = "userSurname";
     public static final String USER_ID = "userId";
@@ -35,10 +34,7 @@ public final class Attributes {
     public static final String EXTEND_PHRASES = "extend_phrases";
     public static final String PHRASES = "phrases";
 
-    public static final String EXTEND_BOTS = "extend_bots";
     public static final String BOTS = "bots";
-
-    public static final String BOT_ID = "bot_id";
 
     public static final String INFO_TITLE = "infoTitle";
     public static final String INFO_MESSAGE = "info_message";
@@ -54,4 +50,6 @@ public final class Attributes {
 
     public static final String CONFIRM = "confirm";
     public static final String REJECT = "reject";
+    public static final String BOT_NOT_FOUND = "bot not found!";
+    public static final String SUCCESS = "success";
 }

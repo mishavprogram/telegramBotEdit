@@ -13,13 +13,6 @@ import java.sql.SQLException;
 
 public class ResultSetExtractors {
 
-    /**
-     * Повертає TelegramBot в якого внутрішні об'єкти це null,
-     * або такі, що містять лише ID
-     * @param rs
-     * @return
-     * @throws SQLException
-     */
     public static TelegramBot extractTelegramBotFromResultSet(ResultSet rs) throws SQLException {
 
         TelegramBot telegramBot = new TelegramBot.Builder()
@@ -33,13 +26,6 @@ public class ResultSetExtractors {
         return telegramBot;
     }
 
-    /**
-     * Повертає ExtendTelegramBot в якого внутрішні об'єкти це null,
-     * або такі, що містять лише ID
-     * @param rs
-     * @return
-     * @throws SQLException
-     */
     public static ExtendTelegramBot extendExtendTelegramBotFromResultSet(ResultSet rs) throws SQLException{
 
         ExtendTelegramBot telegramBot = new ExtendTelegramBot.Builder()
@@ -58,13 +44,6 @@ public class ResultSetExtractors {
         return telegramBot;
     }
 
-    /**
-     * Повертає Phrase в якого внутрішні об'єкти це null,
-     * або такі, що містять лише ID
-     * @param rs
-     * @return
-     * @throws SQLException
-     */
     public static Phrase extractPhraseFromResultSet(ResultSet rs) throws SQLException{
 
         Phrase phrase = new Phrase.Builder()
@@ -82,13 +61,6 @@ public class ResultSetExtractors {
         return phrase;
     }
 
-    /**
-     * Повертає ExtendPhrase в якого внутрішні об'єкти це null,
-     * або такі, що містять лише ID
-     * @param rs
-     * @return
-     * @throws SQLException
-     */
     public static ExtendPhrase extractExtendPhraseFromResultSet(ResultSet rs) throws SQLException{
 
         ExtendPhrase phrase = new ExtendPhrase.Builder()
