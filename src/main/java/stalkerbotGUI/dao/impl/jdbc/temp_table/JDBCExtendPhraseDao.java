@@ -32,6 +32,10 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
                                                                          + "where tpt.phrase_author_id = ? "
                                                                          + "limit ? offset ?;";
 
+    private static final String FIND_BY_ID = "select * from temp_phrase_table as tpt left join user_table"
+                                             + " on tpt.phrase_author_id = user_table.user_id "
+                                             + " where tpt.id = ?";
+
     private static final String GET_ALL_COUNT = "select count(*) from temp_phrase_table";
 
     private static final String GET_BY_USER_COUNT = "select count(*) from temp_phrase_table where phrase_author_id=?";
@@ -75,9 +79,25 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
         }
     }
 
+    //TODO а якщо не знайдено? яка помилка буде?
     @Override
     public Optional<ExtendPhrase> findById(long id) {
-        return Optional.empty();
+        Optional<ExtendPhrase> phraseOptional = Optional.empty();
+
+        try(PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)){
+            statement.setLong(1, id);
+            statement.execute();
+
+            ResultSet set = statement.getResultSet();
+            set.next();
+
+            ExtendPhrase extendPhrase = ResultSetExtractors.extractExtendPhraseFromResultSet(set);
+            phraseOptional = phraseOptional.of(extendPhrase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return phraseOptional;
     }
 
     @Override

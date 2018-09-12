@@ -38,11 +38,20 @@ public final class Attributes {
     public static final String EXTEND_BOTS = "extend_bots";
     public static final String BOTS = "bots";
 
-    public static final String PHRASE_TEXT = "phrase_text";
     public static final String BOT_ID = "bot_id";
 
     public static final String INFO_TITLE = "infoTitle";
     public static final String INFO_MESSAGE = "info_message";
 
     public static final String BOT_LIST = "botList";
+
+    public static final String BOT = "bot";
+    public static final String CRUD_ACTION = "crud_action";
+    public static final String PHRASE_TEXT = "phrase_text";
+    public static final String AUTHOR_NAME = "author_name";
+    public static final String AUTHOR_SURNAME = "author_surname";
+    public static final String TEMP_PHRASE_ID = "temp_phrase_id";
+
+    public static final String CONFIRM = "confirm";
+    public static final String REJECT = "reject";
 }

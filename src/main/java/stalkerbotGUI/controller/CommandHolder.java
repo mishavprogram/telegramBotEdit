@@ -5,6 +5,7 @@ import stalkerbotGUI.controller.commands.HomeCommand;
 import stalkerbotGUI.controller.commands.LogoutCommand;
 import stalkerbotGUI.controller.commands.PageNotFoundCommand;
 import stalkerbotGUI.controller.commands.admin.AdminPageCommand;
+import stalkerbotGUI.controller.commands.admin.ConfirmPhrase;
 import stalkerbotGUI.controller.commands.common.PhrasePageCommand;
 import stalkerbotGUI.controller.commands.common.TelegramBotPageCommand;
 import stalkerbotGUI.controller.commands.login.LoginCommand;
@@ -60,6 +61,9 @@ public class CommandHolder {
 
         commands.put("GET:/user/createPhrase", new CreatePhraseCommand());
         commands.put("POST:/user/createPhrase", new CreatePhraseSubmitCommand());
+
+        commands.put("GET:/admin/confirmPhrase", new ConfirmPhrase());
+
     }
 
     /**

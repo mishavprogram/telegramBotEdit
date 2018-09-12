@@ -17,6 +17,9 @@ public final class PagesPath {
 
     public static final String CREATE_PHRASE = "/user/createPhrase";
     public static final String CREATE_PHRASE_PAGE = VIEW_JSP_CLASSPATH + "createPhrase.jsp";
+    public static final String CONFIRM_PHRASE = "/admin/confirmPhrase";
+    public static final String CONFIRM_PHRASE_PAGE = VIEW_JSP_CLASSPATH + "confirmPhrase.jsp";
+
 
     public static final String LOGIN = "/login";
     public static final String REGISTER = "/register";
@@ -43,4 +46,5 @@ public final class PagesPath {
 
     public static final String SET_TIME = "/setTime";
     public static final String MAKE_DECISION = "/makeDecision";
+
 }

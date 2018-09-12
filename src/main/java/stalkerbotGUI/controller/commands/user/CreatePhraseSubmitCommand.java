@@ -7,6 +7,7 @@ import stalkerbotGUI.model.entity.User;
 import stalkerbotGUI.service.UserService;
 import stalkerbotGUI.service.exception.ServiceException;
 import stalkerbotGUI.service.impl.DefaultUserService;
+import stalkerbotGUI.utils.InfoPageUtils;
 import stalkerbotGUI.utils.constants.Attributes;
 import stalkerbotGUI.utils.constants.PagesPath;
 
@@ -32,7 +33,7 @@ public class CreatePhraseSubmitCommand extends CommandExecutor {
 
         try {
             String text = request.getParameter(Attributes.PHRASE_TEXT);
-            String bot_name = request.getParameter("bot");
+            String bot_name = request.getParameter(Attributes.BOT);
 
             logger.debug("text : "+text);
             logger.debug("bot_name : "+bot_name);
@@ -57,41 +58,31 @@ public class CreatePhraseSubmitCommand extends CommandExecutor {
                     logger.debug("фраза наче створилась без проблем");
                 }else
                 {
-                    logger.debug("помилка при створенні фрази. Бота не знайдено");
-                    request.setAttribute(Attributes.INFO_TITLE, "Помилка при створенні фрази");
-                    request.setAttribute(Attributes.INFO_MESSAGE, "bot nor found!");
+                    InfoPageUtils.prepareInfoForInfoPage(request,
+                                                         "Створення фрази",
+                                                         "bot not found!");
                 }
             } else{
-                logger.debug("помилка при створенні фрази. Автора не знайдено");
-                request.setAttribute(Attributes.INFO_TITLE, "Помилка при створенні фрази");
-                request.setAttribute(Attributes.INFO_MESSAGE, "author not found!");
+                InfoPageUtils.prepareInfoForInfoPage(request,
+                                                     "Створення фрази",
+                                                     "author not found!");
             }
-
-            System.out.println("Ми дойшли сюди");
-            request.setAttribute(Attributes.USER_NAME, "Успіх!");
-            request.setAttribute(Attributes.USER_SURNAME, "Ви створили фразу!");
-
-            request.setAttribute(Attributes.INFO_TITLE, "Успіх!");
-            request.setAttribute(Attributes.INFO_MESSAGE, "Ви створили фразу!");
+            InfoPageUtils.prepareInfoForInfoPage(request,
+                                                 "Успіх!",
+                                                 "Ви створили фразу!");
         }
         catch (NumberFormatException ex){
-            logger.debug("number format exception");
-
             String info_title = "Number Format Exception";
             String info_message = "Ймовірно ви ввели неіснуюче id бота";
 
-            request.setAttribute(Attributes.INFO_TITLE, info_title);
-            request.setAttribute(Attributes.INFO_MESSAGE, info_message);
+            InfoPageUtils.prepareInfoForInfoPage(request, info_title, info_message);
         }
         catch (ServiceException ex){
-            logger.debug("service exception");
-
-            request.setAttribute(Attributes.INFO_TITLE, "Помилка при створенні фрази");
-            request.setAttribute(Attributes.INFO_MESSAGE, ex.getMessage());
+            InfoPageUtils.prepareInfoForInfoPage(request,
+                                                 "Помилка при створенні фрази."
+                                                 + "Рівень сервісів",
+                                                 ex.getMessage());
         }
-
-        logger.debug("info_title : "+request.getAttribute(Attributes.INFO_TITLE));
-        logger.debug("info_message : "+request.getAttribute(Attributes.INFO_MESSAGE));
 
         request.getRequestDispatcher(pageToGo).forward(request, response);
 

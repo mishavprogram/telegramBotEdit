@@ -43,19 +43,25 @@
         <div class="tableBlock">
             <table class="table">
                 <tr>
+                    <td>id</td>
                     <td>text</td>
                     <td>author name</td>
                     <td>author surname</td>
                     <td>crudAction</td>
+                    <td></td>
                 </tr>
                 <c:forEach items="${extend_phrases}" var="phrase">
                     <tr>
+                        <td>${phrase.extendId}</td>
                         <td>${phrase.text}</td>
                         <td>${phrase.author.name}</td>
                         <td>${phrase.author.surname}</td>
                         <td>${phrase.crudAction}</td>
-                        <td></td>
-                        <td><form method="get" crudAction="/"><button class="btn-primary">show</button></form></td>
+                        <td>
+                            <form method="get" action="/admin/confirmPhrase">
+                                <button class="btn-primary" id="temp_phrase_id" name="temp_phrase_id" value="${phrase.extendId}">show</button>
+                            </form>
+                        </td>
                     </tr>
                 </c:forEach>
             </table>

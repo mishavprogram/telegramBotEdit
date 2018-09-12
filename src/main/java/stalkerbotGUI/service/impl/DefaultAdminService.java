@@ -8,6 +8,7 @@ import stalkerbotGUI.service.AdminService;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class DefaultAdminService extends DefaultGeneralUserService implements AdminService {
 
@@ -24,5 +25,16 @@ public class DefaultAdminService extends DefaultGeneralUserService implements Ad
         }
 
         return extendPhraseList;
+    }
+
+    @Override
+    public Optional<ExtendPhrase> getExtendPhrase(long id) {
+        Optional<ExtendPhrase> phraseOptional = Optional.empty();
+
+        try(ExtendPhraseDao extendPhraseDao = DaoFactory.getInstance().createExtendPhraseDao()){
+            phraseOptional = extendPhraseDao.findById(id);
+        }
+
+        return phraseOptional;
     }
 }
