@@ -20,6 +20,8 @@ public class JDBCUserDao implements UserDao {
     private static final String INSERT_USER = "INSERT INTO test1.user_table (name, surname, role, email, password) VALUES (?, ?, ?, ?, ?);";
     private static final String SELECT_USER_BY_EMAIL = "select * from test1.user_table where email = ?;";
     private static final String SELECT_USER_BY_ID = "select * from test1.user_table where user_id = ?;";
+    private static final String DELETE_BY_ID = "delete from user_table where user_id=?";
+
     private Connection connection;
 
     private static Logger logger = Logger.getLogger(JDBCUserDao.class);
@@ -95,7 +97,12 @@ public class JDBCUserDao implements UserDao {
 
     @Override
     public void delete(long id) {
-        throw new NotSupportedException();
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)){
+            preparedStatement.setLong(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage());
+        }
     }
 
 

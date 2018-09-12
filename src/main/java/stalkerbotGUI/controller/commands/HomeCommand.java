@@ -23,9 +23,7 @@ public class HomeCommand extends CommandExecutor {
 
         if (roleType.equals(RoleType.USER))
             return PagesPath.USER_HOME;
-        else if (roleType.equals(RoleType.ADMIN))
+        else
             return PagesPath.ADMIN_HOME;
-        else return PagesPath.WELCOME_PAGE;
-
     }
 }
