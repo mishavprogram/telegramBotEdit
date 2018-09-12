@@ -39,6 +39,7 @@ public final class PagesPath {
     public static final String LOGIN_PAGE = VIEW_JSP_CLASSPATH + "login.jsp";
     public static final String REGISTER_PAGE = VIEW_JSP_CLASSPATH + "register.jsp";
     public static final String INFO_PAGE = VIEW_JSP_CLASSPATH + "info.jsp";
+    public static final String INFO = "/info";
 
     public static final String ADDING_ACTIVITY_PAGE = VIEW_JSP_CLASSPATH+"addAct.jsp";
     public static final String SET_TIME_PAGE = VIEW_JSP_CLASSPATH + "setTimePage.jsp";

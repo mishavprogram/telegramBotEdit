@@ -42,6 +42,10 @@ public class JDBCPhraseDao implements PhraseDao {
         this.connection = connection;
     }
 
+    public Connection getConnection(){
+        return connection;
+    }
+
     //TODO check object for necessary fields, for example - author. ANNOTATIONS!!!!!!!!
     @Override
     public void create(Phrase object) {

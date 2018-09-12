@@ -38,6 +38,6 @@ public class ConfirmPhraseSubmit extends CommandExecutor {
 
         SessionParamUtils.removeExtendPhrase(request);//TODO
         InfoPageUtils.prepareInfoForInfoPage(request, "Success!", "no message");
-        return PagesPath.INFO_PAGE;
+        return PagesPath.INFO;
     }
 }

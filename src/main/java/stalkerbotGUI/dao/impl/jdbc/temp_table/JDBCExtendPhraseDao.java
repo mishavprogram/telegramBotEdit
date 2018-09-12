@@ -40,12 +40,23 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
 
     private static final String GET_BY_USER_COUNT = "select count(*) from temp_phrase_table where phrase_author_id=?";
 
+    private static final String DELETE_BY_ID = "delete from temp_phrase_table where id=?;";
+
     private static Logger logger = Logger.getLogger(JDBCExtendPhraseDao.class);
 
     private Connection connection;
 
     public JDBCExtendPhraseDao(Connection connection){
         this.connection = connection;
+    }
+
+    public void changeConnection(Connection connection){
+        this.close();
+        this.connection = connection;
+    }
+
+    public Connection getConnection(){
+        return connection;
     }
 
     @Override
@@ -175,7 +186,12 @@ public class JDBCExtendPhraseDao implements ExtendPhraseDao {
 
     @Override
     public void delete(long id) {
-
+        try(PreparedStatement preparedStatement = connection.prepareStatement(DELETE_BY_ID)){
+            preparedStatement.setLong(1, id);
+            preparedStatement.execute();
+        } catch (SQLException e) {
+            throw new DaoException(e.getMessage());
+        }
     }
 
     @Override
