@@ -15,6 +15,8 @@ import stalkerbotGUI.model.entity.enums.RoleType;
 
 import java.util.Optional;
 
+//TODO commit-rollback
+//TODO test service with Mockito
 public class JDBCUserDaoTest {
 
     private final String USER_EMAIL = "test_user@ukr.net";

@@ -177,6 +177,7 @@ public class JDBCPhraseDao implements PhraseDao {
 
         } catch (SQLException e) {
             e.printStackTrace();
+            //throw new DaoException(e.getMessage());
         }
 
         return count;
